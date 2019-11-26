@@ -19,4 +19,4 @@ ENV VIM_EMU_CMD_STOP "echo 'Stop iperf_server'"
 # run bash interpreter
 CMD node gateway.js --local_ip "127.0.0.1" --local_port 8282 --local_name "gwf1" --remote_ip "127.0.0.1" --remote_port 8181 --remote_name "gwi" 
 && node device.js --local_ip "127.0.0.1" --local_port 9001 --local_name "dev1" --remote_ip "127.0.0.1" --remote_port 8282 --remote_name "gwf1" --send_period 3000 
-&& node device.js --local_ip "127.0.0.1" --local_port 9001 --local_name "dev1" --remote_ip "127.0.0.1" --remote_port 8282 --remote_name "gwf1" --send_period 3000
+&& node device.js --local_ip "127.0.0.1" --local_port 9001 --local_name "dev2" --remote_ip "127.0.0.1" --remote_port 8282 --remote_name "gwf1" --send_period 3000

@@ -9,15 +9,17 @@ from mininet.link import TCLink
 from mininet.log import info, setLogLevel
 setLogLevel('info')
 
+image="sdci:sdci"
+
 net = Containernet(controller=Controller)
 info('*** Adding controller\n')
 net.addController('c0')
 info('*** Adding docker containers\n')
-Serv=net.addDocker('S', ip='10.0.0.251', dimage="test:noel",dcmd="sh ./server.sh")
-GI = net.addDocker('GI', ip='10.0.0.252', dimage="test:noel",dcmd="sh ./gi.sh")
-GF1 = net.addDocker('GF1', ip='10.0.0.253', dimage="test:noel",dcmd="sh ./gf1.sh")
-GF2 = net.addDocker('GF2', ip='10.0.0.254', dimage="test:noel",dcmd="sh ./gf2.sh")
-GF3 = net.addDocker('GF3', ip='10.0.0.255', dimage="test:noel",dcmd="sh ./gf3.sh")
+Serv=net.addDocker('Serv', ip='10.0.0.251', dimage=image,dcmd="sh ./server.sh")
+GI = net.addDocker('GI', ip='10.0.0.252', dimage=image,dcmd="sh ./gi.sh")
+GF1 = net.addDocker('GF1', ip='10.0.0.253', dimage=image,dcmd="sh ./gf1.sh")
+GF2 = net.addDocker('GF2', ip='10.0.0.254', dimage=image,dcmd="sh ./gf2.sh")
+GF3 = net.addDocker('GF3', ip='10.0.0.255', dimage=image,dcmd="sh ./gf3.sh")
 info('*** Adding switches\n')
 s1 = net.addSwitch('s1')
 info('*** Creating links\n')

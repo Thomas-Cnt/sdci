@@ -1,7 +1,7 @@
 #!/usr/bin/python
-"""
-Modification de containernet_example.py pour créer le réseau du projet SDCI
-"""
+'''
+Modification de containernet_example.py pour creer le reseau du projet SDCI
+'''
 from mininet.net import Containernet
 from mininet.node import Controller
 from mininet.cli import CLI
@@ -9,20 +9,22 @@ from mininet.link import TCLink
 from mininet.log import info, setLogLevel
 setLogLevel('info')
 
+image="sdci:sdci"
+
 net = Containernet(controller=Controller)
 info('*** Adding controller\n')
 net.addController('c0')
 info('*** Adding docker containers\n')
-GF1 = net.addDocker('GF1', ip='10.0.0.251', dimage="imageGF1")
-GF2 = net.addDocker('GF2', ip='10.0.0.252', dimage="imageGF2")
-GF3 = net.addDocker('GF3', ip='10.0.3.253', dimage="imageGF3")
-GI = net.addDocker('GF4', ip='10.0.4.254', dimage="imageGI")
-Serv=net.addDocker('S', ip='10.0.5.255', dimage="imageServ")
+Serv=net.addDocker('Serv', ip='10.0.0.251', dimage=image,dcmd="sh ./server.sh")
+GI = net.addDocker('GI', ip='10.0.0.252', dimage=image,dcmd="sh ./gi.sh")
+GF1 = net.addDocker('GF1', ip='10.0.0.253', dimage=image,dcmd="sh ./gf1.sh")
+GF2 = net.addDocker('GF2', ip='10.0.0.254', dimage=image,dcmd="sh ./gf2.sh")
+GF3 = net.addDocker('GF3', ip='10.0.0.255', dimage=image,dcmd="sh ./gf3.sh")
 info('*** Adding switches\n')
 s1 = net.addSwitch('s1')
 s2 = net.addSwitch('s2')
 s3 = net.addSwitch('s3')
-s4 = net.addSwitch('s4') 
+s4 = net.addSwitch('s4')
 info('*** Creating links\n')
 net.addLink(GF1, s1)
 net.addLink(GF2, s1)
@@ -44,4 +46,3 @@ info('*** Running CLI\n')
 CLI(net)
 info('*** Stopping network')
 net.stop()
-

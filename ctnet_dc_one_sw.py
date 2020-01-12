@@ -29,7 +29,7 @@ from emuvim.dcemulator.net import DCNetwork
 from emuvim.api.rest.rest_api_endpoint import RestApiEndpoint
 from emuvim.api.openstack.openstack_api_endpoint import OpenstackApiEndpoint
 
-# Tous les ping fonctionnent( un à 1/2 mais test depuis intérieur fonctionne)
+# Tous les ping fonctionnent( un a 1/2 mais test depuis interieur fonctionne)
 # Le serveur connait les 3 devices 
 # MAIS aucune GW n'est connue ni du GI ni du serv
 

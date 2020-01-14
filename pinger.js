@@ -9,7 +9,7 @@ var host = '10.0.0.201';
 
 var express = require('express')
 var app = express()
-var LOCAL_ENDPOINT = {IP : '10.0.0.209', PORT : 8989, NAME : 'VnfMonitor'};
+var LOCAL_ENDPOINT = {IP : 'localhost', PORT : 8989, NAME : 'VnfMonitor'};
 /*
 for (i = 0; i < 100; i++) 
 {

@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     iproute2 \
     telnet telnetd \
     iperf
-RUN npm install express request systeminformation yargs
+RUN npm install express request systeminformation yargs ping
 RUN mkdir SDCI
 WORKDIR SDCI
 RUN git init

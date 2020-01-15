@@ -18,5 +18,5 @@ RUN git config user.name "Bobillot"
 RUN git pull http://Bobillot:7c5bb14b95a7563dff91b58ee88bff9af8386693@github.com/Bobillot/Projet-SDCI master
 
 # set entry point for emulator gatekeeper
-ENV VIM_EMU_CMD "node pinger.js &"
+ENV VIM_EMU_CMD "node pinger.js"
 ENV VIM_EMU_CMD_STOP "echo 'Stop vnf monitoring'"

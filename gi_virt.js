@@ -1,9 +1,3 @@
-/**
- *  Author: Samir MEDJIAH medjiah@laas.fr
- *  File : gateway.js
- *  Version : 0.1.0
- */
-
 var express = require('express')
 var app = express()
 app.use(express.json()) // for parsing application/json
@@ -18,10 +12,7 @@ var argv = require('yargs').argv;
 // --remote_port
 // --remote_name
 
-//var LOCAL_ENDPOINT = {IP : argv.local_ip, PORT : argv.local_port, NAME : argv.local_name};
-//var REMOTE_ENDPOINT = {IP : argv.remote_ip, PORT : argv.remote_port, NAME : argv.remote_name};
-
-var LOCAL_ENDPOINT = {IP : '10.0.0.205', PORT : '8585', NAME : 'GI_Virt2'};
+var LOCAL_ENDPOINT = {IP : '10.0.0.205', PORT : '8585', NAME : 'gwi_virt'};
 var REMOTE_ENDPOINT = {IP : '10.0.0.200', PORT : '8080', NAME : 'srv'};
 
 const E_OK              = 200;

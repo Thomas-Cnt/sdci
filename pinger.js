@@ -36,7 +36,7 @@ app.get('/latency', function(req, res)
     res.send(resObj);
     latencies = []
 });
-print("Start VNF Monitoring")
+console.log("Start VNF Monitoring");
 app.listen(LOCAL_ENDPOINT.PORT , function () {
     console.log(LOCAL_ENDPOINT.NAME + ' listening on : ' + LOCAL_ENDPOINT.PORT );
 });

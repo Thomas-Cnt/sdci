@@ -19,7 +19,7 @@ var db = {
         gateways : new Map()
     };
 
-print("Start Virtual GI")
+console.log("Start Virtual GI")
 
 function addNewGateway(gw) {
     var res = -1;

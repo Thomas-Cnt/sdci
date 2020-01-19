@@ -38,31 +38,10 @@ class Execute {
                         Main.logger(this.getClass().getSimpleName(), "Nothing to do");
                         break;
                     case "UC2":
-                        Main.logger(this.getClass().getSimpleName(), "Deploying GW");
-                        String newdestip = manoapi.deploy_gw(Main.shared_knowledge.getGwinfo());
-                        Main.shared_knowledge.setNewdestip(newdestip);
-                        Main.shared_knowledge.setOldgwip(newdestip);
-                        break;
-                    case "UC3":
-                        Main.logger(this.getClass().getSimpleName(), "Redirecting Traffic");
-                        String status = sdnctlrapi.redirect_traffic(Main.shared_knowledge.getOlddestip(), Main.shared_knowledge.getNewdestip());
-                        Main.logger(this.getClass().getSimpleName(), status);
-                        break;
-                    case "UC4":
-                        Main.logger(this.getClass().getSimpleName(), "Deploying LB+GWs");
-                        List<String> newgwsip = manoapi.deploy_multi_gws_and_lb(Main.shared_knowledge.getGwsinfo());
+                        Main.logger(this.getClass().getSimpleName(), "Deploying LB+GW");
+                        List<String> newgwsip = manoapi.deploy_multi_gws_and_lb();
                         Main.shared_knowledge.setLbip(newgwsip.get(0));
                         Main.shared_knowledge.setNewgwsip(newgwsip.subList(1, newgwsip.size()));
-                        break;
-                    case "UC5":
-                        Main.logger(this.getClass().getSimpleName(), "Inserting a loadbalancer");
-                        status = sdnctlrapi.insert_a_loadbalancer(Main.shared_knowledge.getOldgwip(), Main.shared_knowledge.getLbip(), Main.shared_knowledge.getNewgwsip());
-                        Main.logger(this.getClass().getSimpleName(), status);
-                        break;
-                    case "UC6":
-                        Main.logger(this.getClass().getSimpleName(), "Removing less important traffic");
-                        status = sdnctlrapi.remove_less_important_traffic(Main.shared_knowledge.getImportantsrcip());
-                        Main.logger(this.getClass().getSimpleName(), status);
                         break;
                     default:
                 }

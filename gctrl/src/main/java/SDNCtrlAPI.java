@@ -23,7 +23,8 @@ class SDNCtrlAPI {
         } 
         catch (IOException e) 
         { 
-            e.printStackTrace(); return "KO"; 
+            e.printStackTrace(); 
+            status = "KO"; 
         }
         
         try 
@@ -39,10 +40,11 @@ class SDNCtrlAPI {
         } 
         catch (IOException e) 
         { 
-            e.printStackTrace(); return "KO"; 
+            e.printStackTrace(); 
+            status = "KO"; ; 
         }
 
-        return "OK";
+        return status;
     }
 /*
     String insert_a_loadbalancer(String oldgwip, String lbip, List<String> newgwsip) {

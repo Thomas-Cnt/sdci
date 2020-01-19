@@ -53,7 +53,7 @@ class MANOAPI {
         osw.flush();
         osw.close();
         }
-        catch (MalformedURLException | IOException | ProtocolException e){
+        catch (IOException e){
             e.printStackTrace();
         }
         ips.add("10.0.0.206");

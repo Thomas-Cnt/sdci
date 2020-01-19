@@ -42,7 +42,7 @@ class SDNCtrlAPI {
             e.printStackTrace(); return "KO"; 
         }
 
-        return status;
+        return "OK";
     }
 /*
     String insert_a_loadbalancer(String oldgwip, String lbip, List<String> newgwsip) {

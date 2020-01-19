@@ -107,7 +107,7 @@ class Monitor {
         try
           {
           
-          URL url = new URL("http://localhost:8989/latency");
+          URL url = new URL("http://172.17.0.7:8989/latency");
             HttpURLConnection connexion = (HttpURLConnection) url.openConnection();
             connexion.setRequestMethod("GET");
             connexion.setDoOutput(true);

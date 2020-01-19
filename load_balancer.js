@@ -2,6 +2,7 @@ var http = require('http');
 var url = require('url');
 const forward = require('http-forward')
 var index = 1;
+print("Started LB")
 http.createServer(function (req, res) {
         index = 1 - index;
         if (index == 0) {

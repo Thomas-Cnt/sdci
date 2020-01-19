@@ -103,7 +103,8 @@ class Monitor {
     private int get_data() {
         //Call Sensors
         // TODO - Done : Getting average latency over 100 pings from vnf:monitor to GI
-          
+          try
+          {
           String result ="";
           URL url = new URL("http://localhost:8989/latency");
             HttpURLConnection connexion = (HttpURLConnection) url.openConnection();
@@ -116,6 +117,10 @@ class Monitor {
                 result=result+line;
             }
           result=result.replace("[","").replace("]","");
+          }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
           return Integer.parseInt(result);
     }
 

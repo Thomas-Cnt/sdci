@@ -6,14 +6,45 @@ import java.util.List;
  */
 class SDNCtrlAPI {
 
-    String redirect_traffic(String olddestip, String newdestip) {
+    String redirect_traffic() {
         String status = "OK";
-        Main.logger(this.getClass().getSimpleName(), "olddestip = " + olddestip + "; newdestip = " + newdestip);
-        //TODO
+        Main.logger(this.getClass().getSimpleName(), "olddestip = 10.0.0.201 ; newdestip = 10.0.0.206");
+        //TODO - DONE
+        try 
+        {
+            URL url = new URL("http://localhost:8080/stats/flowentry/add");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            String input = "{\"dpid\":1,\"match\": {\"ipv4_dest\":\"10.0.0.201\",\"eth_type\": 2048},\"actions:[{\"type\":\"SET_NW_DST\",\"nw_dst\":\"10.0.0.206\"}]}" ;
+            OutputStream os = conn.getOutputStream();
+            os.write(input.getBytes());
+            os.flush();
+        } 
+        catch (IOException e) 
+        { 
+            e.printStackTrace(); return "KO"; 
+        }
+        
+        try 
+        {
+            URL url = new URL("http://localhost:8080/stats/flowentry/add");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            String input = "{\"dpid\":1,\"match\": {\"ipv4_src\":\"10.0.0.205\",\"eth_type\": 2048},\"actions:[{\"type\":\"SET_NW_SRC\",\"nw_src\":\"10.0.0.201\"}]}" ;
+            OutputStream os = conn.getOutputStream();
+            os.write(input.getBytes());
+            os.flush();
+        } 
+        catch (IOException e) 
+        { 
+            e.printStackTrace(); return "KO"; 
+        }
 
         return status;
     }
-
+/*
     String insert_a_loadbalancer(String oldgwip, String lbip, List<String> newgwsip) {
         String status = "OK";
         Main.logger(this.getClass().getSimpleName(), "oldgwip = " + oldgwip + "; lbip = " + lbip + "; newgwsip = " + newgwsip);
@@ -29,6 +60,6 @@ class SDNCtrlAPI {
 
         return status;
     }
-
+*/
 
 }

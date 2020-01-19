@@ -6,22 +6,16 @@ import com.github.signaflo.timeseries.model.arima.ArimaOrder;
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.asciitable.CWC_LongestWord;
 import de.vandermeer.asciithemes.a7.A7_Grids;
+import sun.awt.image.PixelConverter;
 
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
-import java.lang.Integer;
-import java.lang.String;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 //
 
 //* @author couedrao on 25/11/2019.
@@ -109,19 +103,19 @@ class Monitor {
     private int get_data() {
         //Call Sensors
         // TODO - Done : Getting average latency over 100 pings from vnf:monitor to GI
-       
-          HttpClient client = new DefaultHttpClient();
-          HttpGet request = new HttpGet("http://localhost:8989/latency");
-          HttpResponse response = client.execute(request);
-          BufferedReader rd = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
-          String result="";
-          String line = "";
-          while((line = rd.readLine()) != null) {
-            System.out.println(line);
-            result.append(line);
-          }
+          String str ="";
+          URL url = new URL("http://localhost:8989/latency");
+            HttpURLConnection connexion = (HttpURLConnection) url.openConnection();
+            connexion.setRequestMethod("GET");
+            connexion.setDoOutput(true);
+            connexion.setRequestProperty("Content-Type", "application/json");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connexion.getInputStream()));
+            String line;
+            while((line = reader.readLine())!= null){
+                result=result+line;
+            }
           result=result.replace("[","").replace("]","");
-        return Integer.parseInt(result);
+          return Integer.parseInt(result);
     }
 
     private double get_fake_data() {

@@ -21,5 +21,5 @@ RUN curl -X GET http://homepages.laas.fr/smedjiah/tmp/server.js >> server.js
 RUN curl -X GET http://homepages.laas.fr/smedjiah/tmp/device.js >> device.js
 
 # set entry point for emulator gatekeeper
-ENV VIM_EMU_CMD "iperf -s -D"
-ENV VIM_EMU_CMD_STOP "echo 'Stop iperf_server'"
+# ENV VIM_EMU_CMD "iperf -s -D"
+# ENV VIM_EMU_CMD_STOP "echo 'Stop iperf_server'"

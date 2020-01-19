@@ -30,7 +30,7 @@ app.get('/latency', function(req, res)
         latencies[i]=latency;
     }
     mean = latencies.reduce(reducer);
-    mean = mean/100;
+    //mean = mean/100;
     console.log('sent ' + mean);
     resObj = [mean];
     res.send(resObj);

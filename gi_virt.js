@@ -4,13 +4,6 @@ app.use(express.json()) // for parsing application/json
 
 var request = require('request');
 const si = require('systeminformation');
-var argv = require('yargs').argv;
-// --local_ip
-// --local_port
-// --local_name
-// --remote_ip
-// --remote_port
-// --remote_name
 
 var LOCAL_ENDPOINT = {IP : '10.0.0.205', PORT : '8585', NAME : 'gwi_virt'};
 var REMOTE_ENDPOINT = {IP : '10.0.0.200', PORT : '8080', NAME : 'srv'};
@@ -25,6 +18,8 @@ const E_ALREADY_EXIST   = 500;
 var db = {
         gateways : new Map()
     };
+
+print("Start Virtual GI")
 
 function addNewGateway(gw) {
     var res = -1;

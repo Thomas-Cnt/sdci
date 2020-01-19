@@ -30,7 +30,7 @@ class MANOAPI {
     List<String> deploy_multi_gws_and_lb() {
         
         List<String> ips = new ArrayList<>();
-        
+        try{
         //deploy lb
         URL url = new URL("http://127.0.0.1:5001/restapi/compute/dc1/lb");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -52,7 +52,10 @@ class MANOAPI {
         osw.write("{\"image\":\"vnf:gi\", \"network\":\"(id=test,ip=10.0.0.205/24)\"}");
         osw.flush();
         osw.close();
-        
+        }
+        catch (MalformedURLException | IOException | ProtocolException e){
+            e.printStackTrace();
+        }
         ips.add("10.0.0.206");
         ips.add("10.0.0.205");
         

@@ -10,6 +10,18 @@ import de.vandermeer.asciithemes.a7.A7_Grids;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
+import java.lang.Integer;
+import java.lang.String;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 //
 
 //* @author couedrao on 25/11/2019.
@@ -82,9 +94,9 @@ class Monitor {
             Main.logger(this.getClass().getSimpleName(), "Filling db with latencies");
             while (Main.run)
                 try {
-                    //TODO: Remove this
+                    //TODO: Remove this - DONE : replaced fake data with data
                     Thread.sleep(period);
-                    Main.shared_knowledge.insert_in_tab(new java.sql.Timestamp(new java.util.Date().getTime()), get_fake_data());
+                    Main.shared_knowledge.insert_in_tab(new java.sql.Timestamp(new java.util.Date().getTime()), get_data());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -96,8 +108,20 @@ class Monitor {
 
     private int get_data() {
         //Call Sensors
-        /*TODO*/
-        return 0;
+        // TODO - Done : Getting average latency over 100 pings from vnf:monitor to GI
+       
+          HttpClient client = new DefaultHttpClient();
+          HttpGet request = new HttpGet('http://localhost:8989/latency');
+          HttpResponse response = client.execute(request);
+          BufferedReader rd = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
+          String result="";
+          String line = '';
+          while ((line = rd.readLine()) != null) {
+            System.out.println(line);
+            result.append(line);
+          }
+          result=result.replace("[","").replace("]","");
+        return Integer.parseInt(result);
     }
 
     private double get_fake_data() {

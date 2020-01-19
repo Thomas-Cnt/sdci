@@ -111,12 +111,12 @@ class Monitor {
         // TODO - Done : Getting average latency over 100 pings from vnf:monitor to GI
        
           HttpClient client = new DefaultHttpClient();
-          HttpGet request = new HttpGet('http://localhost:8989/latency');
+          HttpGet request = new HttpGet("http://localhost:8989/latency");
           HttpResponse response = client.execute(request);
           BufferedReader rd = new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
           String result="";
-          String line = '';
-          while ((line = rd.readLine()) != null) {
+          String line = "";
+          while((line = rd.readLine()) != null) {
             System.out.println(line);
             result.append(line);
           }

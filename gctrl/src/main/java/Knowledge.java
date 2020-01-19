@@ -36,7 +36,7 @@ class Knowledge {
     /*TODO : edit symptom, rfc, workflow_lists, plan*/
     private static final List<String> symptom = Arrays.asList("N/A", "NOK", "OK");
     private static final List<String> rfc = Arrays.asList("DoNotDoAnything", "DecreaseLatencyIn" + gw);
-    private static final List<String> workflow_lists = Arrays.asList("UC1", "UC2/UC3", "UC4/UC5/UC6");
+    private static final List<String> workflow_lists = Arrays.asList("UC1", "UC2");
     private static final List<String> plan = Arrays.asList("A", "B", "C");
     private final Map<String, String> gwinfo = new HashMap<>();
     private final List<Map<String, String>> gwsinfo = new ArrayList<>();

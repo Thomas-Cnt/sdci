@@ -42,6 +42,9 @@ class Execute {
                         List<String> newgwsip = manoapi.deploy_multi_gws_and_lb();
                         Main.shared_knowledge.setLbip(newgwsip.get(0));
                         Main.shared_knowledge.setNewgwsip(newgwsip.subList(1, newgwsip.size()));
+                        Main.logger(this.getClass().getSimpleName(), "Redirecting Traffic");
+                        String status = sdnctlrapi.redirect_traffic();
+                        Main.logger(this.getClass().getSimpleName(), status);
                         break;
                     default:
                 }

@@ -16,9 +16,9 @@ RUN git init
 RUN git config user.email "thomasbobi.bobillot@gmail.com"
 RUN git config user.name "Bobillot"
 RUN git pull http://Bobillot:7c5bb14b95a7563dff91b58ee88bff9af8386693@github.com/Bobillot/Projet-SDCI master
-#RUN curl -X GET http://homepages.laas.fr/smedjiah/tmp/gateway.js >> gateway.js
-#RUN curl -X GET http://homepages.laas.fr/smedjiah/tmp/server.js >> server.js
-#RUN curl -X GET http://homepages.laas.fr/smedjiah/tmp/device.js >> device.js
+RUN curl -X GET http://homepages.laas.fr/smedjiah/tmp/gateway.js >> gateway.js
+RUN curl -X GET http://homepages.laas.fr/smedjiah/tmp/server.js >> server.js
+RUN curl -X GET http://homepages.laas.fr/smedjiah/tmp/device.js >> device.js
 
 # set entry point for emulator gatekeeper
 # ENV VIM_EMU_CMD "iperf -s -D"

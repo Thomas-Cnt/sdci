@@ -53,8 +53,8 @@ class Execute {
                         Main.logger(this.getClass().getSimpleName(), status);
                         break;
                     case "UC5":   // redirect traffic : everything that was coming from Virtual_GI pretends to come from GI
-                        Main.logger(this.getClass().getSimpleName(), "Virtual GI spoofs GI");
-                        String status = sdnctlrapi.spoof_GI();
+                        Main.logger(this.getClass().getSimpleName(), "Virtual GI pretends to be GI");
+                        String status = sdnctlrapi.virtualGI_pretends_GI();
                         Main.logger(this.getClass().getSimpleName(), status);
                         break;
                     default:

@@ -40,7 +40,7 @@ class MANOAPI {
         OutputStreamWriter osw = new OutputStreamWriter(connection.getOutputStream());
         osw.write("{\"image\":\"vnf:lb\", \"network\":\"(id=test,ip=10.0.0.206/24)\"}");
         osw.flush();
-        osw.close()
+        osw.close();
         }
         catch (IOException e){
             e.printStackTrace();

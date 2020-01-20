@@ -37,7 +37,7 @@ class Knowledge {
     private static final List<String> symptom = Arrays.asList("N/A", "NOK", "OK");
     private static final List<String> rfc = Arrays.asList("DoNotDoAnything", "DecreaseLatencyIn" + gw);
     private static final List<String> workflow_lists = Arrays.asList("UC1", "UC2");
-    private static final List<String> plan = Arrays.asList("A"); //only one plan : deploying gw and lb, then redirecting traffic
+    private static final List<String> plan = Arrays.asList("A","B"); //A : nothing; B : deploy GW, LB and redirect traffic
     private final Map<String, String> gwinfo = new HashMap<>();
     private final List<Map<String, String>> gwsinfo = new ArrayList<>();
     private final String olddestip = "192.168.0.2";

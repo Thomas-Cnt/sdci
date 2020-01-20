@@ -32,7 +32,14 @@ class SDNCtrlAPI {
             e.printStackTrace(); 
             status = "KO"; 
         }
-        
+
+        return status;
+    }
+    
+    String virtualGI_pretends_GI() {
+        String status = "OK";
+        Main.logger(this.getClass().getSimpleName(), "messages from virtual GI pretend to come from GI");
+        //TODO - DONE
         try 
         {
             URL url = new URL("http://localhost:8080/stats/flowentry/add");
@@ -52,6 +59,8 @@ class SDNCtrlAPI {
 
         return status;
     }
+    
+       
 /*
     String insert_a_loadbalancer(String oldgwip, String lbip, List<String> newgwsip) {
         String status = "OK";

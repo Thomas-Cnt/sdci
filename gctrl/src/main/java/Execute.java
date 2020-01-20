@@ -34,16 +34,27 @@ class Execute {
             for (String w : workflow) {
                 Main.logger(this.getClass().getSimpleName(), "UC : " + w);
                 switch (w) {
-                    case "UC1":
+                    case "UC1":   
                         Main.logger(this.getClass().getSimpleName(), "Nothing to do");
                         break;
-                    case "UC2":
-                        Main.logger(this.getClass().getSimpleName(), "Deploying LB+GW");
-                        List<String> newgwsip = manoapi.deploy_multi_gws_and_lb();
-                        Main.shared_knowledge.setLbip(newgwsip.get(0));
-                        Main.shared_knowledge.setNewgwsip(newgwsip.subList(1, newgwsip.size()));
-                        Main.logger(this.getClass().getSimpleName(), "Redirecting Traffic");
+                    case "UC2":   //deploy LB
+                        Main.logger(this.getClass().getSimpleName(), "Deploying LB");
+                        status = manoapi.deploy_lb();
+                        Main.logger(this.getClass().getSimpleName(), status);
+                        break;
+                    case "UC3":   // deploy GW
+                        Main.logger(this.getClass().getSimpleName(), "Deploying GW");
+                        status = manoapi.deploy_gw();
+                        Main.logger(this.getClass().getSimpleName(), status);
+                        break;
+                    case "UC4":   // redirect traffic : everything that was going to GI goes to LB
+                        Main.logger(this.getClass().getSimpleName(), "Redirecting Traffic to LB");
                         String status = sdnctlrapi.redirect_traffic();
+                        Main.logger(this.getClass().getSimpleName(), status);
+                        break;
+                    case "UC5":   // redirect traffic : everything that was coming from Virtual_GI pretends to come from GI
+                        Main.logger(this.getClass().getSimpleName(), "Virtual GI spoofs GI");
+                        String status = sdnctlrapi.spoof_GI();
                         Main.logger(this.getClass().getSimpleName(), status);
                         break;
                     default:
@@ -76,9 +87,9 @@ class Execute {
             return workflow_lists.get(0).split("/");
         } else if (plan.contentEquals(plans.get(1))) {
             return workflow_lists.get(1).split("/");
-        } else if (plan.contentEquals(plans.get(2))) {
-            return workflow_lists.get(2).split("/");
-        } else
+        } /*else if (plan.contentEquals(plans.get(2))) {
+            return workflow_lists.get(2).split("/");            //only 2 plan : A(nothing) and B(gw lb + redirect)
+        }*/ else
             return null;
     }
 }

@@ -20,6 +20,7 @@ class SDNCtrlAPI {
         {
             URL url = new URL("http://localhost:8080/stats/flowentry/add");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             String input = "{\"dpid\":1,\"match\": {\"ipv4_dest\":\"10.0.0.201\",\"eth_type\": 2048},\"actions:[{\"type\":\"SET_NW_DST\",\"nw_dst\":\"10.0.0.206\"}]}" ;
@@ -44,6 +45,7 @@ class SDNCtrlAPI {
         {
             URL url = new URL("http://localhost:8080/stats/flowentry/add");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             String input = "{\"dpid\":1,\"match\": {\"ipv4_src\":\"10.0.0.205\",\"eth_type\": 2048},\"actions:[{\"type\":\"SET_NW_SRC\",\"nw_src\":\"10.0.0.201\"}]}" ;

@@ -59,7 +59,7 @@ class Analyze {
                 Main.logger(this.getClass().getSimpleName(), "RFC --> To plan : " + rfcs.get(1));
                 return rfcs.get(1);
             } 
-            // if 3 times later the problem is not solved, it means our plans do not work
+            // if 3 times later the problem is not solved, it means our plans do not work, abort
             else {
                 Main.logger(this.getClass().getSimpleName(), "RFC --> To plan : " + "YourPlansDoNotWork");
                 return "YourPlansDoNotWork";

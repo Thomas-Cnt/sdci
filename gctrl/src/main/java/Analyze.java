@@ -46,17 +46,21 @@ class Analyze {
     private String rfc_generator(String symptom) {
         List<String> symptoms = Main.shared_knowledge.get_symptoms();
         List<String> rfcs = Main.shared_knowledge.get_rfc();
-
+            // if current symp == N/A or OK
         if (symptom.contentEquals(symptoms.get(0)) || symptom.contentEquals(symptoms.get(2))) {
             Main.logger(this.getClass().getSimpleName(), "RFC --> To plan : " + rfcs.get(0));
             i = 0;
             return rfcs.get(0);
-        } else if (symptom.contentEquals(symptoms.get(1))) {
+        } 
+         // if current symp == NOK,need to do something -> notifying Plan
+        else if (symptom.contentEquals(symptoms.get(1))) {
             i++;
             if (i < 3) {
                 Main.logger(this.getClass().getSimpleName(), "RFC --> To plan : " + rfcs.get(1));
                 return rfcs.get(1);
-            } else {
+            } 
+            // if 3 times later the problem is not solved, it means our plans do not work
+            else {
                 Main.logger(this.getClass().getSimpleName(), "RFC --> To plan : " + "YourPlansDoNotWork");
                 return "YourPlansDoNotWork";
             }

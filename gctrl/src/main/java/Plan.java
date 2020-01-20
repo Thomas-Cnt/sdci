@@ -52,25 +52,32 @@ class Plan {
         List<String> rfcs = Main.shared_knowledge.get_rfc();
         List<String> plans = Main.shared_knowledge.get_plans();
 
+        // abort if the problem is not solved after 3 times (see analyser.java)
         if ("YourPlansDoNotWork".contentEquals(rfc)) {
             // Thread.sleep(2000);
             Main.run = false;
             Main.logger(this.getClass().getSimpleName(), "All the Plans were executed without success. \n \t\t The loop will stop!");
             // Terminate JVM
             System.exit(0);
-        } else if (rfc.contentEquals(rfcs.get(0))) {
+        } 
+        // if rfc = "DoNotDoAnything", send plan "A" to Execute
+        else if (rfc.contentEquals(rfcs.get(0))) {
             Main.logger(this.getClass().getSimpleName(), "Plan --> To Execute : " + plans.get(0));
             i = 0;
             return plans.get(0);
-        } else if (rfc.contentEquals(rfcs.get(1))) {
-            if (i == 0) {
+        } 
+        // if rfc = "DecreaseLatencyInGW_I", do something : get(1) first and if it doesn't work next time try get(2)
+        // However, we only have one plan (deploying gw, lb and redirecting traffic) so modifying code
+        else if (rfc.contentEquals(rfcs.get(1))) {
+            //if (i == 0) {
                 Main.logger(this.getClass().getSimpleName(), "Plan --> To Execute : " + plans.get(1));
-                i++;
+             //   i++;
                 return plans.get(1);
-            } else if (i == 1) {
+          /*  } else if (i == 1) {
                 Main.logger(this.getClass().getSimpleName(), "Plan --> To Execute : " + plans.get(2));
-                i++;
-                return plans.get(2);
+               i++;
+               return plans.get(2);
+          */  
             }
         }
         return null;

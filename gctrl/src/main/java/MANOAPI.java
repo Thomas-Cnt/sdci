@@ -27,9 +27,9 @@ class MANOAPI {
         return ip;
     }
 */
-    List<String> deploy_multi_gws_and_lb() {
+    String deploy_lb() {
         
-        List<String> ips = new ArrayList<>();
+        String status = "OK";
         try{
         //deploy lb
         URL url = new URL("http://127.0.0.1:5001/restapi/compute/dc1/lb");
@@ -40,8 +40,19 @@ class MANOAPI {
         OutputStreamWriter osw = new OutputStreamWriter(connection.getOutputStream());
         osw.write("{\"image\":\"vnf:lb\", \"network\":\"(id=test,ip=10.0.0.206/24)\"}");
         osw.flush();
-        osw.close();
+        osw.close()
+        }
+        catch (IOException e){
+            e.printStackTrace();
+            status="KO";
+        }
         
+        return status;
+    }
+        String deploy_gw() {
+        
+        String status = "OK";
+        try{
         //deploy virtual gi
         url = new URL("http://127.0.0.1:5001/restapi/compute/dc1/virtualgi");
         connection = (HttpURLConnection) url.openConnection();
@@ -55,10 +66,10 @@ class MANOAPI {
         }
         catch (IOException e){
             e.printStackTrace();
+            status="KO";
         }
-        ips.add("10.0.0.206");
-        ips.add("10.0.0.205");
         
-        return ips;
+        return status;
     }
+
 }

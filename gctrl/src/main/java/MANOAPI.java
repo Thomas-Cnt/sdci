@@ -54,12 +54,12 @@ class MANOAPI {
         String status = "OK";
         try{
         //deploy virtual gi
-        url = new URL("http://127.0.0.1:5001/restapi/compute/dc1/virtualgi");
-        connection = (HttpURLConnection) url.openConnection();
+        URL url = new URL("http://127.0.0.1:5001/restapi/compute/dc1/virtualgi");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("PUT");
         connection.setDoOutput(true);
         connection.setRequestProperty("Content-Type", "application/json");
-        osw = new OutputStreamWriter(connection.getOutputStream());
+        OutputStreamWriter osw = new OutputStreamWriter(connection.getOutputStream());
         osw.write("{\"image\":\"vnf:gi\", \"network\":\"(id=test,ip=10.0.0.205/24)\"}");
         osw.flush();
         osw.close();

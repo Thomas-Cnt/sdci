@@ -33,6 +33,7 @@ class Execute {
 
             for (String w : workflow) {
                 Main.logger(this.getClass().getSimpleName(), "UC : " + w);
+                String status = "";
                 switch (w) {
                     case "UC1":   
                         Main.logger(this.getClass().getSimpleName(), "Nothing to do");
@@ -49,12 +50,12 @@ class Execute {
                         break;
                     case "UC4":   // redirect traffic : everything that was going to GI goes to LB
                         Main.logger(this.getClass().getSimpleName(), "Redirecting Traffic to LB");
-                        String status = sdnctlrapi.redirect_traffic();
+                        status = sdnctlrapi.redirect_traffic();
                         Main.logger(this.getClass().getSimpleName(), status);
                         break;
                     case "UC5":   // redirect traffic : everything that was coming from Virtual_GI pretends to come from GI
                         Main.logger(this.getClass().getSimpleName(), "Virtual GI pretends to be GI");
-                        String status = sdnctlrapi.virtualGI_pretends_GI();
+                        status = sdnctlrapi.virtualGI_pretends_GI();
                         Main.logger(this.getClass().getSimpleName(), status);
                         break;
                     default:

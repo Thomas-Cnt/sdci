@@ -17,6 +17,6 @@ WORKDIR SDCI
 RUN curl -X GET https://github.com/Thomas-Cnt/sdci/blob/master/scripts/vnf_gi.js
 
 # set entry point for emulator gatekeeper
-ENV VIM_EMU_CMD "echo VNF GI at 10.0.0.100 on port 9000"
+ENV VIM_EMU_CMD "echo 'VNF GI at 10.0.0.100 on port 9000'"
 ENV VIM_EMU_CMD "node vnf_gi.js"
 ENV VIM_EMU_CMD_STOP "echo 'Stop VNF GI'"

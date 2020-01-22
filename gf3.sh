@@ -1,1 +1,0 @@
-sleep 13 & node gateway.js --local_ip "10.0.0.204" --local_port 8484 --local_name "gf3" --remote_ip "10.0.0.201" --remote_port 8181 --remote_name "gwi" & sleep 15 & node device.js --local_ip "10.0.0.231" --local_port 9031 --local_name "dev31" --remote_ip "10.0.0.204" --remote_port 8484 --remote_name "gf3" --send_period 3000

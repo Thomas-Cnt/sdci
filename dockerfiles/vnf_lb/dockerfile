@@ -1,0 +1,22 @@
+# base image
+FROM node:latest
+
+# install required packages
+RUN     apt-get update && apt-get install net-tools
+RUN     npm update
+RUN     npm cache verify && npm cache clean --force
+RUN     npm i systeminformation
+RUN     npm i express
+RUN     npm i request
+RUN     npm cache verify && npm cache clean --force
+RUN     npm i yargs
+
+RUN mkdir SDCI
+WORKDIR SDCI
+
+RUN curl -X GET https://github.com/Thomas-Cnt/sdci/blob/master/scripts/vnf_lb.js
+
+# set entry point for emulator gatekeeper
+ENV VIM_EMU_CMD "echo 'Starting VNF load balancer'"
+ENV VIM_EMU_CMD "node vnf_lb.js"
+ENV VIM_EMU_CMD_STOP "echo 'Stop VNF LB'"

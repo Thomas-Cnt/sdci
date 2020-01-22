@@ -14,7 +14,7 @@ RUN     npm i yargs
 RUN mkdir SDCI
 WORKDIR SDCI
 
-RUN curl -X GET https://github.com/Thomas-Cnt/sdci/blob/master/scripts/vnf_gi.js
+RUN curl -X GET https://raw.githubusercontent.com/Thomas-Cnt/sdci/master/scripts/vnf_gi.js
 
 # set entry point for emulator gatekeeper
 ENV VIM_EMU_CMD "echo 'VNF GI at 10.0.0.100 on port 9000'"

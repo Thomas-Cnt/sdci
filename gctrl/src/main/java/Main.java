@@ -78,7 +78,7 @@ class Main {
                     System.out.println("\u001B[1;34m" + "\t[" + from + "] : \t\t" + msg + "\u001B[0m");
                     break;
                 case "Plan":
-                    System.out.println("\u001B[1;35m" + "\t[" + from + "] : \t\t\t" + msg + "\u001B[0m");
+                    System.out.println("\u001B[1;35m" + "\t[" + from + "] : \t\t" + msg + "\u001B[0m");
                     break;
                 case "Execute":
                     System.out.println("\u001B[1;36m" + "\t[" + from + "] : \t\t" + msg + "\u001B[0m");

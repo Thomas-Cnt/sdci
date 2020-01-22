@@ -14,7 +14,7 @@ RUN     npm i yargs
 RUN mkdir SDCI
 WORKDIR SDCI
 
-RUN curl -X GET https://github.com/Thomas-Cnt/sdci/blob/master/scripts/vnf_lb.js
+RUN curl -X GET https://raw.githubusercontent.com/Thomas-Cnt/sdci/master/scripts/vnf_lb.js
 
 # set entry point for emulator gatekeeper
 ENV VIM_EMU_CMD "echo 'Starting VNF load balancer'"

@@ -39,7 +39,7 @@ import java.util.List;
 @SuppressWarnings({"SynchronizeOnNonFinalField"})
 class Monitor {
     private static List<String> symptom;
-    private static final int period = 2000;
+    private static final int period = 2500;
     private static double i = 0;
     public String gw_current_SYMP = "N/A";
 
@@ -58,7 +58,7 @@ class Monitor {
                 Thread.sleep(period * 5);
                 ResultSet rs = Main.shared_knowledge.select_from_tab();
                 //print_nice_rs(rs);
-                double[] prediction = predict_next_lat(rs);
+                double[] prediction = get_next_lat(rs); // predict_next_lat(rs);
                 boolean isOk = true;
                 for (int j = 0; j < Knowledge.horizon; j++) {
                     if (prediction[j] > Knowledge.gw_lat_threshold) {
@@ -73,6 +73,7 @@ class Monitor {
                         break;
                     }
                 }
+
                 if (isOk) {
                     Main.logger(this.getClass().getSimpleName(), "Symptom --> To Analyse : " + symptom.get(2));
                     update_symptom(symptom.get(2));
@@ -102,33 +103,70 @@ class Monitor {
 
     private int get_data() {
         //Call Sensors
-        // TODO - Done : Getting average latency over 100 pings from vnf:monitor to GI
-        String result ="";  
-        try
-          {
-          
-          URL url = new URL("http://172.17.0.7:8989/latency");
-            HttpURLConnection connexion = (HttpURLConnection) url.openConnection();
-            connexion.setRequestMethod("GET");
-            connexion.setDoOutput(true);
-            connexion.setRequestProperty("Content-Type", "application/json");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connexion.getInputStream()));
-            String line;
-            while((line = reader.readLine())!= null){
-                result=result+line;
-            }
-          result=result.replace("[","").replace("]","");
-          }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-          return Integer.parseInt(result);
-    }
+        private double get_data() {
+        //Call Sensors
+        /*TODO*/
+
+        //Main.logger(this.getClass().getSimpleName(), "\u001B[1;33m" + "Get gateway latency" + "\u001B[0m");
+
+        double latency = 0;
+
+        try {
+                        URL url = new URL("http://127.0.0.1:8181/monitor/latency");
+
+                        URLConnection connection = (HttpURLConnection) url.openConnection();
+
+                    InputStream is = connection.getInputStream();
+                    BufferedReader in = new BufferedReader(new InputStreamReader(is));
+                    StringBuilder response = new StringBuilder();
+
+                    String newLine;
+                        while ((newLine = in.readLine()) != null) {
+                                response.append(newLine);
+                        }
+                        in.close();
+
+                        latency = Double.parseDouble(response.toString());
+
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+
+        //Main.logger(this.getClass().getSimpleName(), "\u001B[1;33m" + "...latency = " + latency + "ms" + "\u001B[0m");
+        return latency;
+    
 
     private double get_fake_data() {
         //return new Random().nextInt();
         return i += 2.5;
     }
+
+            
+    private double[] get_next_lat(ResultSet rs) throws SQLException {
+        rs.first();
+        double[] history = new double[Knowledge.moving_wind];
+        double[] p = new double[Knowledge.horizon];
+        int j = Knowledge.moving_wind - 1;
+        while (rs.next()) {
+            history[j] = Double.parseDouble(rs.getString("latency"));
+            j--;
+        }
+//System.out.println(Arrays.toString(history));
+p = Arrays.copyOfRange(history, 1, Knowledge.horizon+1);
+System.out.println("\u001B[1;33m" + "Latencies :" + Arrays.toString(p) + "\u001B[0m");
+
+/*
+        for (int k = 0; k < Knowledge.horizon; k++) {
+                p[k] = history[k];
+                System.out.print(p[k] + "; ");
+        }
+        System.out.println();
+*/
+        return p;
+
+}
+
 
     //ARIMA-based Forecasting
     private double[] predict_next_lat(ResultSet rs) throws SQLException {

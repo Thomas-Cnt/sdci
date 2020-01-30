@@ -1,0 +1,13 @@
+
+.rar contenant l'executable du monitoring dedans
+dans le drive partagé
+( lien si jamais https://drive.google.com/open?id=1mXWu5ceS9Db_l_9uLLMn3QwfmxNYGMRu )
+
+décompresser le fichier .rar puis
+lancer l'application de monitoring
+$ java -jar Monitoring-0.0.1-SNAPSHOT.jar --server.port=8181
+
+
+La boucle dans l'état où elle a été présentée en présentation finale 
+est toujours disponible sur une VM publique sur OpenStack à
+l'adresse 192.168.37.168  sous le login/mdp  sdci / sdci

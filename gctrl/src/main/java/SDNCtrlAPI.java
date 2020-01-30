@@ -19,13 +19,12 @@ class SDNCtrlAPI {
         try 
         {
             URL url = new URL("http://localhost:8080/stats/flowentry/add");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setDoOutput(true);
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            String input = "{\"dpid\":1,\"match\": {\"ipv4_dest\":\"10.0.0.201\",\"eth_type\": 2048},\"actions:[{\"type\":\"SET_NW_DST\",\"nw_dst\":\"10.0.0.206\"}]}" ;
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
             OutputStream os = conn.getOutputStream();
-            os.write(input.getBytes());
+            os.write("{\"dpid\":2,\"match\": {\"ipv4_dest\":\"10.0.0.1\",\"eth_type\": 2048},\"actions:[{\"type\":\"SET_NW_DST\",\"nw_dst\":\"10.0.0.101\"}]}");
             os.flush();
         } 
         catch (IOException e) 
@@ -36,34 +35,9 @@ class SDNCtrlAPI {
 
         return status;
     }
-    
-    String virtualGI_pretends_GI() {
-        String status = "OK";
-        Main.logger(this.getClass().getSimpleName(), "messages from virtual GI pretend to come from GI");
-        //TODO - DONE
-        try 
-        {
-            URL url = new URL("http://localhost:8080/stats/flowentry/add");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setDoOutput(true);
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            String input = "{\"dpid\":1,\"match\": {\"ipv4_src\":\"10.0.0.205\",\"eth_type\": 2048},\"actions:[{\"type\":\"SET_NW_SRC\",\"nw_src\":\"10.0.0.201\"}]}" ;
-            OutputStream os = conn.getOutputStream();
-            os.write(input.getBytes());
-            os.flush();
-        } 
-        catch (IOException e) 
-        { 
-            e.printStackTrace(); 
-            status = "KO"; ; 
-        }
-
-        return status;
-    }
-    
+      
        
-/*
+
     String insert_a_loadbalancer(String oldgwip, String lbip, List<String> newgwsip) {
         String status = "OK";
         Main.logger(this.getClass().getSimpleName(), "oldgwip = " + oldgwip + "; lbip = " + lbip + "; newgwsip = " + newgwsip);
@@ -79,6 +53,6 @@ class SDNCtrlAPI {
 
         return status;
     }
-*/
+
 
 }
